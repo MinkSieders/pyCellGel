@@ -7,8 +7,6 @@ Script that can model and solve _in silico_ cell-laden hydrogels based on user i
 **Solver** (_solver_): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
 hydrogel.
 
-$$ P(t) = P_0 e^{rt} $$
-
 **Modeller** (_modeller_): Models hydrogels in different user-defined shapes and concentrations.
 
 **Growth Modeller** (_model_growth_): Models the growths of microbial CFU's randomly dispersed through a cell-laden hydrogel. Assumes the gel restricts mobility or that microbes form spherical microcolonies. 
