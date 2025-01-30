@@ -21,7 +21,7 @@ For in-depth explanation on all the flags within each command, use --help or -h.
 
 ## Usage | Solver
 
-`pyCellGel solver`
+`python pyCellGel solver`
 
 Calculates the required bacterial concentration to achieve a given target inter-CFU distance within the hydrogel. This is useful for ensuring uniform distribution in experimental setups.
 
@@ -39,7 +39,9 @@ To model a gel in which 95 % of the population satisfies a mean nearest neighbou
 
 `python pyCellGel.py solver --P_target 0.95 --r_target 50 --model_prediction True`
 
-## Modeller (modeller)
+## Usage | Modeller
+
+`python pyCellGel modeller`
 
 The modeller command allows users to define hydrogel shapes and dimensions while specifying bacterial concentrations either directly or via an optical density (OD600) measurement.
 
@@ -73,41 +75,19 @@ CubeRect
 
 ### Example Usage:
 
+To construct a rectangular cube of 1 x 0.5 x 2 mm, with a optical density of 0.01 containing randomly distributed CFUs, use the following arguments:
+
 `python pyCellGel.py modeller --shape CubeRect --height 1.0 --width 0.5 --length 2.0 --optical_density 0.01`
 
-## Figure Generation (figure)
+## Usage | Growth Modeller
 
-The figure command generates visualization figures based on the computed or modeled hydrogel data.
+`python pyCellGel model_growth`
 
-### Arguments:
-
-(No additional arguments required.)
-
-### Example Usage:
-
-`python pyCellGel.py figure`
+The growth modeller command simulates the growth of microbial CFUs within a cell-laden hydrogel, accounting for their random dispersion. It assumes either that the gel restricts microbial mobility or that microbes aggregate into spherical microcolonies over time. This tool is essential for studying how bacterial colonies expand in a controlled hydrogel environment and helps predict microbial behavior under various conditions.
 
 ### Output Handling
 
 For each command, an output directory (output_<command>) is created to store results. If an existing directory is found, it is removed and recreated to ensure clean output generation.
-
-## Growth Modeller (model_growth)
-
-The growth modeller command simulates the growth of microbial CFUs within a cell-laden hydrogel, accounting for their random dispersion. It assumes either that the gel restricts microbial mobility or that microbes aggregate into spherical microcolonies over time. This tool is essential for studying how bacterial colonies expand in a controlled hydrogel environment and helps predict microbial behavior under various conditions.
-
-### Arguments:
-
-`--growth_factor` (float, required): Specifies the rate at which the microbial population grows (fold increase per time step).
-
-`--time_steps` (int, optional, default: 100): The number of time steps to simulate the colony growth.
-
-`--initial_concentration` (float, optional, CFU/ml): The initial microbial concentration at the start of the simulation.
-
-`--hydrogel_shape` (str, optional, default: Sphere): The shape of the hydrogel in which the microbial growth is modeled. Options: Sphere, Cylinder, CubeRect, CubeSquare.
-
-`--density_threshold` (float, optional, default: 0.9): The population density at which growth stops (as a fraction of the hydrogel volume).
-
-`--boundary_conditions` (str, optional, default: Periodic): The boundary conditions of the simulation. Options: Periodic, Reflective.
 
 ### Example Usage:
 
