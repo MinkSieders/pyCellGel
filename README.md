@@ -1,5 +1,17 @@
 # pyCellGel
-Script that can model and solve _in silico_ cell-laden hydrogels.
+Script that can model and solve _in silico_ cell-laden hydrogels based on user input.
+
+Solver (solver): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
+hydrogel.
+
+Modeller (modeller): Models hydrogels in different user-defined shapes and concentrations.
+
+Figure Generation (figure): Generates visualization figures based on the model data.
+
+Each functionality is accessed through a command-line argument specifying the mode, followed by additional flags for 
+customization. Most commands are fitted with default values, make sure to change according to your needs. 
+
+For in-depth explanation on all the flags, use --help or -h. 
 
 1. Solver (solver)
 
