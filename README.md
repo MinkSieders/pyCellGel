@@ -4,14 +4,12 @@
 Script that can model and solve _in silico_ cell-laden hydrogels based on user input.
 
 ## Main Commands
-Solver (solver): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
+**Solver** (_solver_): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
 hydrogel.
 
-Modeller (modeller): Models hydrogels in different user-defined shapes and concentrations.
+**Modeller** (_modeller_): Models hydrogels in different user-defined shapes and concentrations.
 
-Figure Generation (figure): Generates visualization figures based on the model data.
-
-Growth Modeller (model_growth): Models the growths of microbial CFU's randomly dispersed through a cell-laden hydrogel. Assumes the gel restricts mobility or that microbes form spherical microcolonies. 
+**Growth Modeller** (_model_growth_): Models the growths of microbial CFU's randomly dispersed through a cell-laden hydrogel. Assumes the gel restricts mobility or that microbes form spherical microcolonies. 
 
 ## Input
 Each command is accessed through a command-line argument specifying the mode, followed by additional flags for 
