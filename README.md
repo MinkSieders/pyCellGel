@@ -1,6 +1,9 @@
 # pyCellGel
+
+## Description
 Script that can model and solve _in silico_ cell-laden hydrogels based on user input.
 
+## Main Commands
 Solver (solver): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
 hydrogel.
 
@@ -8,12 +11,17 @@ Modeller (modeller): Models hydrogels in different user-defined shapes and conce
 
 Figure Generation (figure): Generates visualization figures based on the model data.
 
-Each functionality is accessed through a command-line argument specifying the mode, followed by additional flags for 
+Growth Modeller (model_growth): Models the growths of microbial CFU's randomly dispersed through a cell-laden hydrogel. Assumes the gel restricts mobility or that microbes form spherical microcolonies. 
+
+## Input
+Each command is accessed through a command-line argument specifying the mode, followed by additional flags for 
 customization. Most commands are fitted with default values, make sure to change according to your needs. 
 
-For in-depth explanation on all the flags, use --help or -h. 
+For in-depth explanation on all the flags within each command, use --help or -h. 
 
-1. Solver (solver)
+## Usage
+1. Solver
+`pyCellGel solver`
 
 The solver command calculates the required bacterial concentration to achieve a given target inter-CFU distance within the hydrogel. This is useful for ensuring uniform distribution in experimental setups.
 
