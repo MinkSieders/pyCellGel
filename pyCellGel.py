@@ -1,5 +1,3 @@
-from matplotlib.patches import Circle
-from mpl_toolkits.mplot3d import Axes3D
 import mpl_toolkits.mplot3d.art3d as art3d
 from scipy.spatial import distance
 from itertools import combinations
@@ -7,17 +5,14 @@ from itertools import product
 import os
 import shutil
 from scipy.special import gamma
-import numpy as np
 import scipy.integrate as integrate
 from scipy.optimize import root_scalar
 import argparse
 from scipy.integrate import quad
-import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from matplotlib.patches import Circle
 
 """
@@ -27,27 +22,11 @@ Date: January 30 2025
 Created: December 2024
 Author: Mink Sieders
 
-Short: Script that can model and solve different cell-laden hydrogels based on user input.
-
-Solver (solver): Computes the required loading concentrations to achieve a specified inter-CFU distribution within the 
-hydrogel.
-
-Modeller (modeller): Models hydrogels in different user-defined shapes and concentrations.
-
-Figure Generation (figure): Generates visualization figures based on the model data.
-
-Each functionality is accessed through a command-line argument specifying the mode, followed by additional flags for 
-customization.
-
-For in-depth explanation on all the flags, please refer to the .readme. 
-
 Version History:
 V0-2: Incorporated Modeller, Solver. 
 V3: Incorporated growth-dynamics within a hydrogel, simulating very basic growth on equally dispersed CFU's in a hydrogel.
 The above dynamics assume microbes stay in place and are physically restricted to their starting location. 
 """
-
-
 
 fig_dDist, ax_dDist = None, None
 
@@ -61,7 +40,6 @@ def plot_SummaryFig(shapes):
 
     # Function to add an image (PNG or SVG) to a PDF
     def add_image_to_pdf(pdf_canvas, img_path, x, y, max_width, max_height):
-        """Add an image (PNG or SVG) to a PDF."""
         pdf_canvas.drawImage(img_path, x, y, width=max_width, height=max_height, preserveAspectRatio=True)
 
     for shape in shapes:
@@ -74,7 +52,7 @@ def plot_SummaryFig(shapes):
         # Separate "whole" image from others
         whole_image = next((img for img in image_paths if "whole" in img.lower()), None)
         other_images = [img for img in image_paths if img != whole_image]
-        print(whole_image, other_images)
+
         # Create a PDF canvas
         pdf_path = f"summary_{shape}_model.pdf"
         pdf_canvas = canvas.Canvas(pdf_path, pagesize=letter)
@@ -320,6 +298,7 @@ def plot_WholeGel(shape, CFU_num, gel_radius, gel_height, gel_width, gel_length,
         ax.set_zlabel("z (mm)")
         plt.savefig(f'modelled_{shape}_whole.png', dpi=1200)
         plt.close()
+
     plt.close()
     return CFU_positions
 
@@ -574,7 +553,6 @@ def plot_pDist(conc, pt=0.95):
     plt.plot(r_values_vis, P_values, color="b", label="P(r)")
     plt.fill_between(r_values_vis, 0, P_values, where=(r_values_vis >= r_lower_vis), color='yellow', alpha=0.3)
     plt.axvline(x=r_lower_vis, color="r", linestyle="--", label=f"r_lower = {r_lower_vis:.2f} µm")
-    # ax.text(r_lower_vis + 2, 0.9 * max(P_values), f'{r_lower_vis:.2f} µm', color='black')
     plt.text(r_middle_vis, max(P_values)/2, f"P(r > {r_lower_vis:.2f} µm)\n≈ {pt:.2f}", horizontalalignment='center')
 
     plt.xlim(0, r_end_vis)
@@ -626,10 +604,6 @@ def determineConcentration(rt, Pt):
             return alternativeMethod()
 
     def alternativeMethod():
-        """
-        Simple alternative method to estimate the concentration using a numerical search.
-        This can be a binary search or another method that works in the specific case.
-        """
         # Perform a simple search for rho by testing different values (binary search approach)
         low, high = 1e-10, 1000
         tolerance = 1e-6
@@ -732,7 +706,7 @@ def figure_1():
     plt.tight_layout()
 
     # Save the figure
-    plt.savefig("FIG_1.svg")
+    plt.savefig("d (μm) vs Concentration (CFU/ml) vs P(r > d).svg")
 
 
 def Compute_ODConcentration(concentration, optical_density, file_for_od_curve):
@@ -873,18 +847,6 @@ def plot_InitialPositionMicrobes(positions, length, name):
 
 
 def compute_ColonyRadius(fold_increase, initial_bacteria_count=1, packing=0.64):
-    """
-    Compute the minimal radius of a grown microcolony based on the number of bacteria,
-    their volume, and packing efficiency.
-
-    Parameters:
-    - fold_increase: Fold increase in concentration (e.g., 10 means 10x more bacteria)
-    - initial_bacteria_count: Initial number of bacteria (CFU count at t0)
-
-    Returns:
-    - Radius of the grown microcolony in micrometers (µm)
-    """
-
     # Microbe dimensions (in µm)
     rod_radius = 0.5  # µm
     rod_length = 2  # µm
@@ -911,13 +873,6 @@ def compute_ColonyRadius(fold_increase, initial_bacteria_count=1, packing=0.64):
 
 
 def plot_GrownMicrobes(positions, colony_radius, name):
-    """
-    Plots the grown microcolonies as spheres at the given CFU positions.
-
-    Parameters:
-    - positions: List of CFU positions (N x 3 array with x, y, z coordinates).
-    - colony_radius: Radius of each grown microcolony in µm.
-    """
 
     fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(111, projection='3d')
@@ -1018,14 +973,14 @@ if __name__ == "__main__":
     # model_growth command
     growth_parser = subparsers.add_parser("model_growth", help="Run the growth modeller command")
     growth_parser.add_argument("--concentration1", type=float, required=False,
-                               help="Concentration (CFU/ml), omits calculation via OD if input is given. No default.")
+                               help="Starting concentration (CFU/ml) of the initial hydrogel (with randomly dispersed CFU's), omits calculation via OD if input is given. No default.")
     growth_parser.add_argument("--optical_density1", type=float, required=False, default=0.005,
                                help="Concentration (OD600), default 0.005. Requires a standard OD600 vs. CFU/ml curve, "
                                     "if not given it defaults to an E. coli curve")
     growth_parser.add_argument("--optical_density_curve1", type=str, required=False,
                                help="Accepts a .tsv file with OD and corresponding CFU/ml values, if not provided the script defaults to using"
                                     "values obtained from E. coli, the used values are saved as .tsv")
-    growth_parser.add_argument("--concentration2", type=float, required=False, help="Concentration (CFU/ml), omits calculation via OD if input is given. No default.")
+    growth_parser.add_argument("--concentration2", type=float, required=False, help="Concentration (CFU/ml) after incubation, omits calculation via OD if input is given. No default.")
     growth_parser.add_argument("--optical_density2", type=float, required=False, default=1.0,
                                  help="Concentration (OD600), default 1.0. Requires a standard OD600 vs. CFU/ml curve, "
                                       "if not given it defaults to an E. coli curve")
@@ -1073,4 +1028,3 @@ if __name__ == "__main__":
             in_c_end = Compute_ODConcentration(args.concentration2, args.optical_density2, args.optical_density_curve1)
 
         main_GrowthModeller(in_c_start, in_c_end)
-
