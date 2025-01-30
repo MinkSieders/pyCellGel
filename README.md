@@ -91,7 +91,7 @@ The growth modeller command simulates the growth of microbial CFUs within a cell
 
 [Coming Soon]
 
-### Output Handling
+## Output Handling
 
 For each command, an output directory (output_<command>) is created to store results. If an existing directory is found, it is removed and recreated to ensure clean output generation.
 
