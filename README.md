@@ -21,11 +21,12 @@ For in-depth explanation on all the flags within each command, use --help or -h.
 
 ## Usage
 1. Solver
+
 `pyCellGel solver`
 
-The solver command calculates the required bacterial concentration to achieve a given target inter-CFU distance within the hydrogel. This is useful for ensuring uniform distribution in experimental setups.
+Calculates the required bacterial concentration to achieve a given target inter-CFU distance within the hydrogel. This is useful for ensuring uniform distribution in experimental setups.
 
-Arguments:
+### Arguments:
 
 --P_target (float, required): Population fraction required to satisfy the target distance.
 
