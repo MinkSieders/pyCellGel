@@ -27,11 +27,11 @@ Calculates the required bacterial concentration to achieve a given target inter-
 
 ### Arguments:
 
-'--P_target' (float, required): Population fraction required to satisfy the target distance.
+`--P_target` (float, required): Population fraction required to satisfy the target distance.
 
-'--r_target' (float, required, μm): Desired inter-CFU distance (converted internally to mm).
+`--r_target` (float, required, μm): Desired inter-CFU distance (converted internally to mm).
 
-'--model_prediction' (bool, optional, default: False): If True, a cilindrical hydrogel is additionally modeled based on the computed parameters.
+`--model_prediction` (bool, optional, default: False): If True, a cilindrical hydrogel is additionally modeled based on the computed parameters.
 
 ### Example Usage:
 
