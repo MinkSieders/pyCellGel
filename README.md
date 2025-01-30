@@ -1,5 +1,5 @@
 # pyCellGel
-Script that can model and solve different cell-laden hydrogels.
+Script that can model and solve _in silico_ cell-laden hydrogels.
 
 1. Solver (solver)
 
