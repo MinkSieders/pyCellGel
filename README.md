@@ -19,8 +19,7 @@ customization. Most commands are fitted with default values, make sure to change
 
 For in-depth explanation on all the flags within each command, use --help or -h. 
 
-## Usage
-1. Solver
+## Usage | Solver
 
 `pyCellGel solver`
 
