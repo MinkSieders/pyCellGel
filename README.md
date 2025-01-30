@@ -83,12 +83,16 @@ To construct a rectangular cube of 1 x 0.5 x 2 mm, with a optical density of 0.0
 
 The growth modeller command simulates the growth of microbial CFUs within a cell-laden hydrogel, accounting for their random dispersion. It assumes either that the gel restricts microbial mobility or that microbes aggregate into spherical microcolonies over time. This tool is essential for studying how bacterial colonies expand in a controlled hydrogel environment and helps predict microbial behavior under various conditions.
 
+### Arguments:
+
+[Coming Soon]
+
+### Example Usage:
+
+[Coming Soon]
+
 ### Output Handling
 
 For each command, an output directory (output_<command>) is created to store results. If an existing directory is found, it is removed and recreated to ensure clean output generation.
 
-### Example Usage:
 
-To model the growth of an E. coli colony within a sphere-shaped hydrogel:
-
-`python pyCellGel.py model_growth --growth_factor 1.2 --time_steps 200 --hydrogel_shape Sphere --initial_concentration 1e6 --boundary_conditions Periodic`
