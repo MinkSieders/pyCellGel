@@ -31,11 +31,13 @@ Calculates the required bacterial concentration to achieve a given target inter-
 
 --r_target (float, required, μm): Desired inter-CFU distance (converted internally to mm).
 
---model_prediction (bool, optional, default: False): If True, a hydrogel is also modeled based on the computed parameters.
+--model_prediction (bool, optional, default: False): If True, a hydrogel is additionally modeled based on the computed parameters.
 
-Example Usage:
+### Example Usage:
 
-python pyCellGel.py solver --P_target 0.5 --r_target 50 --model_prediction True
+To model a gel in which 95 % of the population satisfies a mean nearest neighbour CFU distance of 50 microns, run the following command:
+
+`python pyCellGel.py solver --P_target 0.95 --r_target 50 --model_prediction True'
 
 2. Modeller (modeller)
 
