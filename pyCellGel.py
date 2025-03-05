@@ -706,7 +706,7 @@ def figure_1():
     plt.tight_layout()
 
     # Save the figure
-    plt.savefig("d (μm) vs Concentration (CFU/ml) vs P(r > d).svg")
+    plt.savefig("d_vs_c_vs_p>r.svg")
 
 
 def Compute_ODConcentration(concentration, optical_density, file_for_od_curve):
